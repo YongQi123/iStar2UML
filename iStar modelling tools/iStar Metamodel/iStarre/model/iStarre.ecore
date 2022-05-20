@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="iStarre" nsURI="http://www.example.org/iStarre" nsPrefix="iStarre">
+  <eClassifiers xsi:type="ecore:EClass" name="iStar">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actor" upperBound="-1"
+        eType="#//Actor" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dependency" upperBound="-1"
+        eType="#//Dependency" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Actor">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="intentionalelement" upperBound="-1"
+        eType="#//Intentionalelement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="isA" eType="#//Actor"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="prticipatesIn" eType="#//Actor"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Agent" eSuperTypes="#//Actor"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Role" eSuperTypes="#//Actor">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isEntity" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Dependency">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dependum" eType="#//Intentionalelement"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="depender" eType="#//Actor"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dependee" eType="#//Actor"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dependeeElmt" eType="#//Intentionalelement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dependerElmt" eType="#//Intentionalelement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Intentionalelement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contributtionTo" upperBound="-1"
+        eType="#//ContributtionTo" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Refinement" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GoalTaskElement" abstract="true" eSuperTypes="#//Intentionalelement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refines" eType="#//Refinement"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constraint" upperBound="-1"
+        eType="#//Constraint"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ContributtionTo">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Cobtribution" eType="#//ContrbutionType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contributesTo" eType="#//Quality"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ANDrefinement" eSuperTypes="#//Refinement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to2" lowerBound="2" upperBound="-1"
+        eType="#//GoalTaskElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ORrefinement" eSuperTypes="#//Refinement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to1" lowerBound="1" upperBound="-1"
+        eType="#//GoalTaskElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Goal" eSuperTypes="#//GoalTaskElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Task" eSuperTypes="#//GoalTaskElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isCombinedFragment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isLoop" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isPrior" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="previousTask" eType="#//Task"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Constraint" eSuperTypes="#//Intentionalelement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Resource" eSuperTypes="#//Intentionalelement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="association" upperBound="-1"
+        eType="#//Resource"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="neededBy" upperBound="-1"
+        eType="#//Task"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isEntity" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Boolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Quality" eSuperTypes="#//Intentionalelement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="qualifies" upperBound="-1"
+        eType="#//Resource"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="qualifies2" upperBound="-1"
+        eType="#//GoalTaskElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ContrbutionType">
+    <eLiterals name="Make"/>
+    <eLiterals name="Help" value="1"/>
+    <eLiterals name="Break" value="2"/>
+    <eLiterals name="Hurt" value="3"/>
+  </eClassifiers>
+</ecore:EPackage>

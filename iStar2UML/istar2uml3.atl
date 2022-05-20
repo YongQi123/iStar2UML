@@ -1,0 +1,392 @@
+module istar2uml;
+--@path newIstar=/istar2uml/newIstar.ecore
+--@path REMODEL=/istar2uml/REMODEL.ecore
+create OUT : REMODEL from IN : newIstar;
+
+helper def: println(enu: OclAny): OclAny =
+	enu.debug();
+
+
+
+rule Task2CallMessage {
+	from
+			is: newIstar!Task
+	to	
+	       op1:REMODEL!Operation(
+					name <- is.name
+				)	,
+			Call:REMODEL!CallMessage(
+				
+					name <- is.name ,
+					op <- op1
+			),
+			Return:REMODEL!ReturnMessage(
+				
+					name <- is.name + 'Return',
+					invocationMessage <- Call
+			),
+			Exe:REMODEL!Execution(
+			        name <- is.name
+			),
+			mSen:REMODEL!MessageEnd(
+			        name <-is.name	,
+					message <- Call
+			),
+			e1:REMODEL!ExecutionEnd(
+					name <- is.name,
+					execution <- Exe
+					
+			),
+			e2:REMODEL!ExecutionEnd(
+					name <-is.name+'Finish',
+					execution <- Exe
+			),
+			mRet:REMODEL!MessageEnd(
+					name <-is.name+'ReturnReceiver',
+					message <- Return
+			),
+			
+			cf:REMODEL!CombinedFragment(
+					name <-is.name
+			),
+			
+			cfe1:REMODEL!CombinedFragmentEnd(
+					name <-is.name+'Start',
+					owner <- cf
+			),
+			
+			cfe2:REMODEL!CombinedFragmentEnd(
+					name <-is.name+'Finish',
+					owner <- cf
+			)
+			
+			--cf1:REMODEL!CombinedFragmentEnd(
+			--		name <-is.name+'MethodAltStart'
+			--),
+			
+		    --cf2:REMODEL!CombinedFragmentEnd(
+			--		name <-is.name+'MethodAltFinish'
+			--)
+			--combinedFragments<-REMODEL!CombinedFragment.allInstances()->select(e|newIstar!Task.allInstances()->select(x|x.name=e.name)
+			--		->collect(t|t.refines)->flatten()->select(o|o.oclIsTypeOf(newIstar!ORrefinement))->collect(n|n.to1)->flatten()->exists(temp|temp.name=task.name ))
+			
+			
+	do {
+		
+		        for(t in REMODEL!CallMessage.allInstances()) {
+						t.receivingEnd<-REMODEL!ExecutionEnd.allInstances()->select(x|x.name= t.name);
+		}	
+		
+		for(temp in REMODEL!CallMessage.allInstances()) {
+						temp.sendingEnd <-REMODEL!MessageEnd.allInstances()->select(x|x.name= temp.name);
+		}		
+		
+		for(temp in REMODEL!Execution.allInstances()) {
+						temp.start <-REMODEL!ExecutionEnd.allInstances()->select(x|x.name= temp.name);
+		}
+		
+		
+
+			
+	
+			
+	}	   
+}
+ rule Goal2Service
+{
+	from
+			inten: newIstar!Goal
+	to
+			t:REMODEL!Service
+			(
+				
+				name <- inten.name,
+				operation <- REMODEL!Operation.allInstances()->select(e|newIstar!Task.allInstances()->select(x|x.name=e.name)
+					->collect(t|t.refines)->flatten()->select(o|o.oclIsTypeOf(newIstar!ANDrefinement))->collect(n|n.to2)->flatten()->exists(temp|temp.name=inten.name))
+				)
+	do {	
+		
+		--for(temp in REMODEL!Execution.allInstances()) {
+		--				temp.owner <-REMODEL!Service.allInstances()->select(e|newIstar!Goal.allInstances()->select(x|x.name= e.name)
+		--				->collect(t|t.refines)->flatten()->select(o|o.oclIsTypeOf(newIstar!ANDrefinement))->collect(n|n.to2)->flatten()->exists(q|q.name=inten.name));
+		}
+		
+	}	
+
+
+
+rule istar2RequirementModel {
+	from
+		is : newIstar!iStar
+	to 
+		re : REMODEL!RequirementModel (
+			name <- is.name,
+			UseCaseModel <- thisModule.istar2UseceseModel(is),
+			DomainModel <- thisModule.istar2DomainModel(is)
+		)	
+}
+
+lazy rule istar2DomainModel {
+	from
+		is :newIstar!iStar
+	to 
+		dm : REMODEL!DomainModel (
+			
+			name <- is.name,
+			entity <- is.actor->collect(e | thisModule.Role2Entity(e))
+			-- ->collect(e | thisModule.Entity2Entity(e))
+			
+		)
+		
+}
+
+lazy rule Role2Entity {
+	from
+			en: newIstar!Resource
+	to
+			t:REMODEL!Entity(
+					name <- en.name
+					
+					--attribute <- en.attribute->collect(e | thisModule.Attribute2Attribute(e))
+					
+					--attribute <- en.attribute->select(e | e.oclIsTypeOf(newIstar!Attribute))->collect(e | thisModule.Attribute2Attribute(e))
+			)
+			do {
+				--thisModule.println(en.attribute->select(e | e.oclIsTypeOf(newIstar!Attribute)));
+			
+		}
+}
+
+
+
+
+lazy rule Attribute2Attribute {
+	from
+			att: newIstar!Attribute
+	to
+			t:REMODEL!Attribute(
+					name <- att.name
+			)
+}
+
+
+lazy rule istar2UseceseModel {
+	from
+		is : newIstar!iStar
+	to 
+		um : REMODEL!UseCaseModel (
+			name <- is.name,
+			
+			uc <-is.actor->collect(e|e.intentionalelement)->flatten()
+			->select(e | e.oclIsTypeOf(newIstar!Goal))
+			->collect(e | thisModule.Goal2UC(e)),
+			
+			actor <- is.actor->collect(e | thisModule.Role2Actor(e)),
+			
+			--service<-is.actor->collect(e|e.intentionalelement)->flatten()
+		   -- ->select(e | e.oclIsTypeOf(newIstar!Goal))
+			-- ->collect(e | thisModule.Goal2Service(e)),
+			 
+           service<-REMODEL!Service.allInstances(),
+		   -->select(e|newIstar!Goal.allInstances()->select(x|x.name=e.name)
+					-->collect(t|t.actor)->flatten()->select(o|o.oclIsTypeOf(newIstar!Actor))->collect(n|n.intentionalelement)->flatten()->exists(temp|temp.name=is.name)),
+
+			
+					
+             interaction <-is.actor->collect(e|e.intentionalelement)->flatten()
+			   ->select(e | e.oclIsTypeOf(newIstar!Goal))
+			 ->collect(e | thisModule.Goal2Interaction(e))
+			--interaction <-is.actor->collect(e | thisModule.Task2Interaction(e))
+		
+			
+		)
+}
+
+lazy rule Role2Actor {
+	from
+			role: newIstar!Role
+	to
+			t:REMODEL!Actor(
+					name <- role.name,
+					uc <- REMODEL!UC.allInstances()
+					->select(uc | role.intentionalelement
+						->select(e | e.oclIsTypeOf(newIstar!Goal))
+						->exists(g|g.name=uc.name))
+			)
+}
+
+lazy rule Goal2UC {
+	from
+			s: newIstar!Goal
+	to
+			t:REMODEL!UC(
+					name <- s.name
+			)
+}
+
+
+
+lazy rule Goal2Interaction
+{
+	
+	from
+			inten: newIstar!Goal
+	to
+			t:REMODEL!Interaction
+			(
+				name <- inten.name,
+				
+				messages<-REMODEL!CallMessage.allInstances()->select(e|newIstar!Task.allInstances()->select(x|x.name=e.name)
+					->collect(t|t.refines)->flatten()->select(o|o.oclIsTypeOf(newIstar!ANDrefinement))->collect(n|n.to2)->flatten()->exists(temp|temp.name=inten.name)),
+					
+				messages<-REMODEL!ReturnMessage.allInstances()->select(e|newIstar!Task.allInstances()->select(x|x.name+ 'Return'=e.name)
+					->collect(t|t.refines)->flatten()->select(o|o.oclIsTypeOf(newIstar!ANDrefinement))->collect(n|n.to2)->flatten()->exists(temp|temp.name=inten.name )),
+					
+				executions<-REMODEL!Execution.allInstances()->select(e|newIstar!Task.allInstances()->select(x|x.name=e.name)
+					->collect(t|t.refines)->flatten()->select(o|o.oclIsTypeOf(newIstar!ANDrefinement))->collect(n|n.to2)->flatten()->exists(temp|temp.name=inten.name )),
+					
+				ends<-REMODEL!MessageEnd.allInstances()->select(e|newIstar!Task.allInstances()->select(x|x.name=e.name)
+					->collect(t|t.refines)->flatten()->select(o|o.oclIsTypeOf(newIstar!ANDrefinement))->collect(n|n.to2)->flatten()->exists(temp|temp.name=inten.name )),	
+					
+				ends<-REMODEL!ExecutionEnd.allInstances()->select(e|newIstar!Task.allInstances()->select(x|x.name+'Start'=e.name)
+					->collect(t|t.refines)->flatten()->select(o|o.oclIsTypeOf(newIstar!ANDrefinement))->collect(n|n.to2)->flatten()->exists(temp|temp.name=inten.name )),	
+					
+				ends<-REMODEL!ExecutionEnd.allInstances()->select(e|newIstar!Task.allInstances()->select(x|x.name+'Finish'=e.name)
+					->collect(t|t.refines)->flatten()->select(o|o.oclIsTypeOf(newIstar!ANDrefinement))->collect(n|n.to2)->flatten()->exists(temp|temp.name=inten.name )),	
+				
+				ends<-REMODEL!MessageEnd.allInstances()->select(e|newIstar!Task.allInstances()->select(x|x.name+'ReturnReceiver'=e.name)
+					->collect(t|t.refines)->flatten()->select(o|o.oclIsTypeOf(newIstar!ANDrefinement))->collect(n|n.to2)->flatten()->exists(temp|temp.name=inten.name )),
+				
+				combinedFragments<-REMODEL!CombinedFragment.allInstances()->select(e|newIstar!Task.allInstances()->select(x|x.name=e.name)
+					->collect(t|t.refines)->flatten()->select(o|o.oclIsTypeOf(newIstar!ORrefinement))->collect(n|n.to1)->flatten()->exists(temp|temp.name=inten.name ))
+					
+				--ends<-REMODEL!CombinedFragmentEnd.allInstances()->select(e|newIstar!Task.allInstances()->select(x|x.name+'MethodAltFinish'=e.name)
+				--	->collect(t|t.refines)->flatten()->select(o|o.oclIsTypeOf(newIstar!ORrefinement))->collect(n|n.to2)->flatten()->exists(temp|temp.name=inten.name ))
+			)
+	do{
+			 
+		}
+}
+
+
+
+
+
+
+lazy rule Task2MessageEndS {
+	from
+			is: newIstar!Task
+	to
+			
+			m1:REMODEL!MessageEnd(
+					name <-is.name+'Sender'			
+			)
+}
+
+lazy rule Task2MessageEndR {
+	from
+			is: newIstar!Task
+	to
+			
+			m2:REMODEL!MessageEnd(
+					name <-is.name+'ReturnReceiver'
+			)
+}
+
+
+lazy rule Task2CombinedFragmentLoop{
+	from
+			is: newIstar!Task
+	to
+			
+			m2:REMODEL!CombinedFragment(
+					name <-is.name+'Loop'
+			)
+}
+
+lazy rule Task2CombinedFragmentLS{
+	from
+			is: newIstar!Task
+	to
+			
+			m2:REMODEL!CombinedFragmentEnd(
+					name <-is.name+'LoopStart'
+			)
+}
+
+lazy rule Task2CombinedFragmentLF{
+	from
+			is: newIstar!Task
+	to
+			
+			m2:REMODEL!CombinedFragmentEnd(
+					name <-is.name+'LoopFinish'
+			)
+}
+
+lazy rule Task2CombinedFragmentMethodAlt {
+	from
+			is: newIstar!Task
+	to
+			
+			m2:REMODEL!CombinedFragment(
+					name <-is.name+'MethodAlt'
+			)
+}
+
+lazy rule Task2CombinedFragmentMAS{
+	from
+			is: newIstar!Task
+	to
+			
+			m2:REMODEL!CombinedFragmentEnd(
+					name <-is.name+'MethodAltStart'
+			)
+}
+
+lazy rule Task2CombinedFragmentMAF{
+	from
+			is: newIstar!Task
+	to
+			
+			m2:REMODEL!CombinedFragmentEnd(
+					name <-is.name+'MethodAltFinish'
+			)
+}
+
+lazy rule Task2Execution {
+	from
+			is: newIstar!Task
+	to
+			
+			e:REMODEL!Execution(
+					name <- is.name
+			)
+}
+
+lazy rule Task2ExecutionEndS {
+	from
+			is: newIstar!Task
+	to
+			
+			e1:REMODEL!ExecutionEnd(
+					name <- is.name+'Start'
+			)
+}
+
+lazy rule Task2ExecutionEndF {
+	from
+			is: newIstar!Task
+	to
+			
+			e2:REMODEL!ExecutionEnd(
+					name <-is.name+'Finish'
+			)
+}
+
+
+
+
+
+
+

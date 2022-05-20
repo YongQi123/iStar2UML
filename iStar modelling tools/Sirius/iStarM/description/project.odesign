@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/description/tool/1.1.0" name="project" version="12.0.0.2017041100">
+  <ownedViewpoints name="iStarre">
+    <ownedRepresentations xsi:type="description_1:DiagramDescription" name="istar" initialisation="true" domainClass="iStarre::iStar" enablePopupBars="true">
+      <defaultLayer name="Default">
+        <nodeMappings name="role" domainClass="iStarre::Role">
+          <style xsi:type="style:WorkspaceImageDescription" labelSize="17" showIcon="false" sizeComputationExpression="-1" labelPosition="node" resizeKind="NSEW" workspacePath="/my.project.design/photo/role.svg">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='blue']"/>
+            <labelFormat>bold</labelFormat>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="agent" domainClass="iStarre::Agent">
+          <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" sizeComputationExpression="-1" labelPosition="node" resizeKind="NSEW" workspacePath="/my.project.design/photo/agent.svg">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="actor" preconditionExpression="ocl:self.oclIsTypeOf(iStarre::Actor)" semanticCandidatesExpression="aql:self.actor" domainClass="iStarre::Actor">
+          <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" sizeComputationExpression="-1" labelPosition="node" resizeKind="NSEW" workspacePath="/my.project.design/photo/actor.svg">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="Dependency" domainClass="iStarre::Dependency">
+          <conditionnalStyles predicateExpression="ocl:self.dependum.oclIsTypeOf(newIstar::Goal)">
+            <style xsi:type="style:SquareDescription" labelSize="17" showIcon="false" labelExpression="aql:self.dependum.name" labelPosition="node" resizeKind="NSEW">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
+              <labelFormat>bold</labelFormat>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
+            </style>
+          </conditionnalStyles>
+          <conditionnalStyles predicateExpression="ocl:self.dependum.oclIsTypeOf(newIstar::Task)">
+            <style xsi:type="style:WorkspaceImageDescription" labelSize="14" showIcon="false" labelExpression="aql:self.dependum.name" sizeComputationExpression="-1" labelPosition="node" resizeKind="NSEW" workspacePath="/my.project.design/photo/task.svg">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelFormat>bold</labelFormat>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
+            </style>
+          </conditionnalStyles>
+          <conditionnalStyles predicateExpression="ocl:self.dependum.oclIsTypeOf(newIstar::Resource)">
+            <style xsi:type="style:SquareDescription" labelSize="12" labelPosition="node" resizeKind="NSEW">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            </style>
+          </conditionnalStyles>
+          <conditionnalStyles predicateExpression="ocl:self.dependum.oclIsTypeOf(newIstar::Quality)">
+            <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" labelExpression="aql:self.dependum.name" sizeComputationExpression="-1" labelPosition="node" resizeKind="NSEW" workspacePath="/my.project.design/photo/softgoal.svg">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </style>
+          </conditionnalStyles>
+        </nodeMappings>
+        <edgeMappings name="depender" preconditionExpression="aql:self.dependerElmt == null" sourceMapping="//@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@nodeMappings[name='Dependency']" targetMapping="//@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@nodeMappings[name='actor'] //@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@nodeMappings[name='agent'] //@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@nodeMappings[name='role']" targetFinderExpression="aql:self.depender">
+          <style sourceArrow="OutputFillClosedArrow" targetArrow="OutputFillClosedArrow" sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription labelSize="12">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="dependee" preconditionExpression="aql:self.dependeeElmt == null" sourceMapping="//@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@nodeMappings[name='Dependency']" targetMapping="//@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@nodeMappings[name='actor'] //@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@nodeMappings[name='agent'] //@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@nodeMappings[name='role']" targetFinderExpression="aql:self.dependee">
+          <style sourceArrow="OutputFillClosedArrow" targetArrow="OutputFillClosedArrow" sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription labelSize="12">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="dependerElmt" sourceMapping="//@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@nodeMappings[name='Dependency']" targetMapping="//@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@containerMappings[name='IntentionalElement']/@subNodeMappings[name='Task'] //@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@containerMappings[name='IntentionalElement']/@subNodeMappings[name='Resource'] //@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@containerMappings[name='IntentionalElement']/@subNodeMappings[name='Quality'] //@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@containerMappings[name='IntentionalElement']/@subNodeMappings[name='Goal']" targetFinderExpression="aql:self.dependerElmt">
+          <style sourceArrow="OutputFillClosedArrow" targetArrow="OutputFillClosedArrow" sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <centerLabelStyleDescription labelSize="12">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="qualifies" sourceMapping="//@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@containerMappings[name='IntentionalElement']/@subNodeMappings[name='Quality']" targetMapping="//@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@containerMappings[name='IntentionalElement']/@subNodeMappings[name='Resource']" targetFinderExpression="aql:self.qualifies">
+          <style targetArrow="NoDecoration" sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription labelSize="12">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="dependeeElmt" sourceMapping="//@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@nodeMappings[name='Dependency']" targetMapping="//@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@containerMappings[name='IntentionalElement']/@subNodeMappings[name='Task'] //@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@containerMappings[name='IntentionalElement']/@subNodeMappings[name='Resource'] //@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@containerMappings[name='IntentionalElement']/@subNodeMappings[name='Quality'] //@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@containerMappings[name='IntentionalElement']/@subNodeMappings[name='Goal']" targetFinderExpression="aql:self.dependeeElmt">
+          <style sourceArrow="OutputFillClosedArrow" targetArrow="OutputFillClosedArrow" sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <centerLabelStyleDescription labelSize="12">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="qualifies2" sourceMapping="//@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@containerMappings[name='IntentionalElement']/@subNodeMappings[name='Quality']" targetMapping="//@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@containerMappings[name='IntentionalElement']/@subNodeMappings[name='Goal'] //@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@containerMappings[name='IntentionalElement']/@subNodeMappings[name='Task']" targetFinderExpression="aql:self.qualifies2">
+          <style lineStyle="dash" targetArrow="NoDecoration" sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription labelSize="12">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="isa" sourceMapping="//@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@nodeMappings[name='actor'] //@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@nodeMappings[name='role']" targetMapping="//@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@nodeMappings[name='actor'] //@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@nodeMappings[name='role']" targetFinderExpression="aql:self.isa">
+          <style sourceArrow="OutputFillClosedArrow" sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <centerLabelStyleDescription labelSize="12">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="participatesIn" sourceMapping="//@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@nodeMappings[name='actor'] //@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@nodeMappings[name='agent'] //@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@nodeMappings[name='role']" targetMapping="//@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@nodeMappings[name='actor'] //@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@nodeMappings[name='agent'] //@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@nodeMappings[name='role']" targetFinderExpression="aql:self.participatesIn">
+          <style sourceArrow="OutputClosedArrow" targetArrow="InputClosedArrow" sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <centerLabelStyleDescription labelSize="12">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="neededBy" sourceMapping="//@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@containerMappings[name='IntentionalElement']/@subNodeMappings[name='Resource']" targetMapping="//@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@containerMappings[name='IntentionalElement']/@subNodeMappings[name='Goal'] //@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@containerMappings[name='IntentionalElement']/@subNodeMappings[name='Task']" targetFinderExpression="aql:self.neededBy">
+          <style targetArrow="Diamond" sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription labelSize="12">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="or" sourceMapping="//@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@containerMappings[name='IntentionalElement']/@subNodeMappings[name='Goal'] //@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@containerMappings[name='IntentionalElement']/@subNodeMappings[name='Task']" targetMapping="//@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@containerMappings[name='IntentionalElement']/@subNodeMappings[name='Goal'] //@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@containerMappings[name='IntentionalElement']/@subNodeMappings[name='Task']" targetFinderExpression="aql:self.refines.to1">
+          <style targetArrow="InputFillClosedArrow" sizeComputationExpression="3">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
+            <centerLabelStyleDescription labelSize="12">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="and" sourceMapping="//@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@containerMappings[name='IntentionalElement']/@subNodeMappings[name='Goal'] //@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@containerMappings[name='IntentionalElement']/@subNodeMappings[name='Task']" targetMapping="//@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@containerMappings[name='IntentionalElement']/@subNodeMappings[name='Goal'] //@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@containerMappings[name='IntentionalElement']/@subNodeMappings[name='Task']" targetFinderExpression="aql:self.refines.to2">
+          <style targetArrow="OutputClosedArrow" sizeComputationExpression="3">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
+            <centerLabelStyleDescription labelSize="12">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <containerMappings name="IntentionalElement" domainClass="iStarre::Actor">
+          <subNodeMappings name="Goal" semanticCandidatesExpression="feature:eAllContents" domainClass="iStarre::Goal">
+            <style xsi:type="style:EllipseNodeDescription" labelSize="17" showIcon="false" labelPosition="node" resizeKind="NSEW">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
+              <labelFormat>bold</labelFormat>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
+            </style>
+          </subNodeMappings>
+          <subNodeMappings name="Task" semanticCandidatesExpression="feature:eAllContents" domainClass="iStarre::Task">
+            <style xsi:type="style:LozengeNodeDescription" labelSize="17" showIcon="false" labelPosition="node" resizeKind="NSEW">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
+              <labelFormat>bold</labelFormat>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
+            </style>
+          </subNodeMappings>
+          <subNodeMappings name="Resource" semanticCandidatesExpression="feature:eAllContents" domainClass="iStarre::Resource">
+            <style xsi:type="style:SquareDescription" labelSize="17" showIcon="false" labelPosition="node" resizeKind="NSEW">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelFormat>bold</labelFormat>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
+            </style>
+          </subNodeMappings>
+          <subNodeMappings name="Quality" semanticCandidatesExpression="feature:eAllContents" domainClass="iStarre::Quality">
+            <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" sizeComputationExpression="-1" labelPosition="node" resizeKind="NSEW" workspacePath="/my.project.design/photo/softgoal.svg">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </style>
+          </subNodeMappings>
+          <style xsi:type="style:FlatContainerStyleDescription" arcWidth="200" arcHeight="200" borderSizeComputationExpression="6" borderLineStyle="dash_dot" labelSize="12" showIcon="false" labelExpression="" roundedCorner="true">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+            <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+          </style>
+        </containerMappings>
+        <toolSections name="actor">
+          <ownedTools xsi:type="tool:ToolGroup" name="Actors">
+            <tools xsi:type="tool:NodeCreationDescription" name="actor" nodeMappings="//@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@nodeMappings[name='actor']">
+              <variable name="container"/>
+              <viewVariable name="containerView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext">
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="iStarre::Actor" referenceName="actor">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="Name" valueExpression="aql:'actor'"/>
+                    <subModelOperations xsi:type="tool_1:CreateInstance" typeName="iStarre::Actor" referenceName="actor">
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="Name" valueExpression="aql:'actor'"/>
+                    </subModelOperations>
+                  </subModelOperations>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:NodeCreationDescription" name="agent" nodeMappings="//@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@nodeMappings[name='agent']">
+              <variable name="container"/>
+              <viewVariable name="containerView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext">
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="iStarre::Agent" referenceName="actor">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'agent'"/>
+                  </subModelOperations>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:NodeCreationDescription" name="role" nodeMappings="//@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@nodeMappings[name='role']">
+              <variable name="container"/>
+              <viewVariable name="containerView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext">
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="iStarre::Role" referenceName="actor">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'role'"/>
+                  </subModelOperations>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="participatesIn" edgeMappings="//@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@edgeMappings[name='participatesIn']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext">
+                <subModelOperations xsi:type="tool_1:SetValue" featureName="participatesIn" valueExpression="var:target"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="isa" edgeMappings="//@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@edgeMappings[name='isa']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext">
+                <subModelOperations xsi:type="tool_1:SetValue" featureName="isa" valueExpression="var:target"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+        </toolSections>
+        <toolSections name="intentionalelement">
+          <ownedTools xsi:type="tool:ToolGroup">
+            <tools xsi:type="tool:NodeCreationDescription" name="Goal" nodeMappings="//@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@containerMappings[name='IntentionalElement']/@subNodeMappings[name='Goal']">
+              <variable name="container"/>
+              <viewVariable name="containerView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext">
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="iStarre::Goal" referenceName="intentionalelement">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'goal'"/>
+                  </subModelOperations>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:NodeCreationDescription" name="Task" nodeMappings="//@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@containerMappings[name='IntentionalElement']/@subNodeMappings[name='Task']">
+              <variable name="container"/>
+              <viewVariable name="containerView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext">
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="iStarre::Task" referenceName="intentionalelement">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'task'"/>
+                  </subModelOperations>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:NodeCreationDescription" name="Resource" nodeMappings="//@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@containerMappings[name='IntentionalElement']/@subNodeMappings[name='Resource']">
+              <variable name="container"/>
+              <viewVariable name="containerView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext">
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="iStarre::Resource" referenceName="intentionalelement">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'resource'"/>
+                  </subModelOperations>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:NodeCreationDescription" name="Quality" nodeMappings="//@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@containerMappings[name='IntentionalElement']/@subNodeMappings[name='Quality']">
+              <variable name="container"/>
+              <viewVariable name="containerView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext">
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="iStarre::Quality" referenceName="intentionalelement">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'quality'"/>
+                  </subModelOperations>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="neededBy" edgeMappings="//@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@edgeMappings[name='neededBy']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext">
+                <subModelOperations xsi:type="tool_1:SetValue" featureName="neededBy" valueExpression="var:target"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="qualifies" edgeMappings="//@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@edgeMappings[name='qualifies'] //@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@edgeMappings[name='qualifies2']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:source">
+                <subModelOperations xsi:type="tool_1:If" conditionExpression="ocl:target.oclIsTypeOf(newIstar::Resource)">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="qualifies" valueExpression="var:target"/>
+                </subModelOperations>
+                <subModelOperations xsi:type="tool_1:If" conditionExpression="ocl:target.oclIsTypeOf(newIstar::Goal)">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="qualifies2" valueExpression="var:target"/>
+                </subModelOperations>
+                <subModelOperations xsi:type="tool_1:If" conditionExpression="ocl:target.oclIsTypeOf(newIstar::Task)">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="qualifies2" valueExpression="var:target"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="or" edgeMappings="//@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@edgeMappings[name='or']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:source">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="iStarre::Refinement" referenceName="refines" variableName="instanceRefinement">
+                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:instanceRefinement">
+                    <subModelOperations xsi:type="tool_1:CreateInstance" typeName="iStarre::ORrefinement" referenceName="refines" variableName="instanceOR"/>
+                    <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:instanceOR">
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="to1" valueExpression="var:target"/>
+                    </subModelOperations>
+                  </subModelOperations>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="and" edgeMappings="//@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@edgeMappings[name='and']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:source">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="iStarre::Refinement" referenceName="refines" variableName="instanceRefinement"/>
+                <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:instanceRefinement">
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="iStarre::ANDrefinement" referenceName="refines" variableName="instanceAND"/>
+                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:instanceAND">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="to2" valueExpression="var:target"/>
+                  </subModelOperations>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+        </toolSections>
+        <toolSections name="dependency">
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="Dependency" nodeMappings="//@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@nodeMappings[name='Dependency']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="iStarre::Dependency" referenceName="dependency">
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="newIstar::Dependency" referenceName="dependency">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'Dependency'"/>
+                    <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:instance">
+                      <subModelOperations xsi:type="tool_1:CreateInstance" typeName="iStarre::Goal" referenceName="dependum">
+                        <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'dependem'"/>
+                      </subModelOperations>
+                    </subModelOperations>
+                  </subModelOperations>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'Dependency'"/>
+                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:instance">
+                    <subModelOperations xsi:type="tool_1:CreateInstance" typeName="iStarre::Goal" referenceName="dependum">
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'dependem'"/>
+                    </subModelOperations>
+                  </subModelOperations>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="dependee" edgeMappings="//@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@edgeMappings[name='dependee']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext">
+                <subModelOperations xsi:type="tool_1:SetValue" featureName="dependee" valueExpression="var:target"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="depender" edgeMappings="//@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@edgeMappings[name='depender']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext">
+                <subModelOperations xsi:type="tool_1:SetValue" featureName="depender" valueExpression="var:target"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="dependeeElmt" edgeMappings="//@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@edgeMappings[name='dependeeElmt']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext">
+                <subModelOperations xsi:type="tool_1:SetValue" featureName="dependeeElmt" valueExpression="var:target"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="dependerElmt" edgeMappings="//@ownedViewpoints[name='iStarre']/@ownedRepresentations[name='istar']/@defaultLayer/@edgeMappings[name='dependerElmt']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext">
+                <subModelOperations xsi:type="tool_1:SetValue" featureName="dependerElmt" valueExpression="var:target"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+        </toolSections>
+      </defaultLayer>
+    </ownedRepresentations>
+    <ownedJavaExtensions qualifiedClassName="my.project.design.Services"/>
+  </ownedViewpoints>
+</description:Group>

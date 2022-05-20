@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel"
+    modelDirectory="/iStarre/src-gen" creationIcons="false" editDirectory="/iStarre.edit/src-gen"
+    editorDirectory="/iStarre.editor/src-gen" modelPluginID="iStarre" modelName="IStarre"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" codeFormatting="true"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>iStarre.ecore</foreignModel>
+  <testsDirectory xsi:nil="true"/>
+  <genPackages prefix="IStarre" disposableProviderFactory="true" ecorePackage="iStarre.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="iStarre.ecore#//ContrbutionType">
+      <genEnumLiterals ecoreEnumLiteral="iStarre.ecore#//ContrbutionType/Make"/>
+      <genEnumLiterals ecoreEnumLiteral="iStarre.ecore#//ContrbutionType/Help"/>
+      <genEnumLiterals ecoreEnumLiteral="iStarre.ecore#//ContrbutionType/Break"/>
+      <genEnumLiterals ecoreEnumLiteral="iStarre.ecore#//ContrbutionType/Hurt"/>
+    </genEnums>
+    <genClasses ecoreClass="iStarre.ecore#//iStar">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iStarre.ecore#//iStar/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iStarre.ecore#//iStar/actor"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iStarre.ecore#//iStar/dependency"/>
+    </genClasses>
+    <genClasses ecoreClass="iStarre.ecore#//Actor">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iStarre.ecore#//Actor/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iStarre.ecore#//Actor/intentionalelement"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iStarre.ecore#//Actor/isA"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iStarre.ecore#//Actor/prticipatesIn"/>
+    </genClasses>
+    <genClasses ecoreClass="iStarre.ecore#//Agent"/>
+    <genClasses ecoreClass="iStarre.ecore#//Role">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iStarre.ecore#//Role/isEntity"/>
+    </genClasses>
+    <genClasses ecoreClass="iStarre.ecore#//Dependency">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iStarre.ecore#//Dependency/dependum"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iStarre.ecore#//Dependency/depender"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iStarre.ecore#//Dependency/dependee"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iStarre.ecore#//Dependency/dependeeElmt"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iStarre.ecore#//Dependency/dependerElmt"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="iStarre.ecore#//Intentionalelement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iStarre.ecore#//Intentionalelement/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iStarre.ecore#//Intentionalelement/contributtionTo"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="iStarre.ecore#//Refinement"/>
+    <genClasses image="false" ecoreClass="iStarre.ecore#//GoalTaskElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iStarre.ecore#//GoalTaskElement/refines"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iStarre.ecore#//GoalTaskElement/constraint"/>
+    </genClasses>
+    <genClasses ecoreClass="iStarre.ecore#//ContributtionTo">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iStarre.ecore#//ContributtionTo/Cobtribution"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iStarre.ecore#//ContributtionTo/contributesTo"/>
+    </genClasses>
+    <genClasses ecoreClass="iStarre.ecore#//ANDrefinement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iStarre.ecore#//ANDrefinement/to2"/>
+    </genClasses>
+    <genClasses ecoreClass="iStarre.ecore#//ORrefinement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iStarre.ecore#//ORrefinement/to1"/>
+    </genClasses>
+    <genClasses ecoreClass="iStarre.ecore#//Goal"/>
+    <genClasses ecoreClass="iStarre.ecore#//Task">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iStarre.ecore#//Task/isCombinedFragment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iStarre.ecore#//Task/isLoop"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iStarre.ecore#//Task/isPrior"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iStarre.ecore#//Task/previousTask"/>
+    </genClasses>
+    <genClasses ecoreClass="iStarre.ecore#//Constraint"/>
+    <genClasses ecoreClass="iStarre.ecore#//Resource">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iStarre.ecore#//Resource/association"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iStarre.ecore#//Resource/neededBy"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iStarre.ecore#//Resource/isEntity"/>
+    </genClasses>
+    <genClasses ecoreClass="iStarre.ecore#//Quality">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iStarre.ecore#//Quality/qualifies"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iStarre.ecore#//Quality/qualifies2"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

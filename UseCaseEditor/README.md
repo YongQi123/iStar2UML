@@ -1,4 +1,4 @@
-# 主要结构：
+# Use Case Editor主要结构：
 
 ## 用例描述（用户故事形式）：
 
@@ -40,8 +40,8 @@
 在系统中，用于指定特性，用关键字Where表示 syntax : WHERE (feature is included) the (system name) shall (system response)
 例子: “Where the control system includes an overspeed protection function, the control system shall test the availability of the overspeed protection function prior to aircraft dispatch.” 例子：控制系统包括超速保护功能的，控制系统应在飞机调度前测试超速保护功能的可用性。
 
-    ![图片](imgs/EARS1.png)
-
+   ![图片](imgs/EARS1.png)
+   
 ### 案例讲解
    该部分采用基础EARS形式，本部分整体为选填项，当需要对用例进行内部描述时进行填写，其中NUM.后面的需要表述当前需求是用户需求还是系统需求（User/System），另外案例中红色字段为必填项，紫色字段为选填项，注意：案例中灰色空格不可被忽略。
    
@@ -52,3 +52,15 @@
    该部分采用基本的自然语言描述形式，对需求的细节进行补充，另外案例中红色字段为必填项，黄色背景为选填部分，对细节进行补充，注意：案例中灰色空格不可被忽略（由于技术原因该部分大括号内部的空格为两个）。
 
   ![图片](imgs/KC.png)
+  
+# Use Case Editor安装说明：
+1.从北航云盘下载org.xtext.example.requirements.updatesite-1.0.0-SNAPSHOT.zip。
+2.在RM2PT工具中，从主菜单栏Help → Install New Software 打开安装窗口。
+3.点击Add，在弹出窗口中点击Archive，选择之前下载的.zip文件，点击Add确认添加。
+4.添加.zip(即updatesite文件)之后，在下方会出现图1中的Feature，勾选之后默认Next即可安装。
+5. 安装过程中，出现提示，选择Install anyway。
+6. 安装完成后，软件提示重启以生效，重启即可。
+7. 重启后在任意文件夹下新建后缀名为.re的文件，按后续介绍书写自然语言需求，关键词会出现高亮，说明插件安装成功。
+
+
+

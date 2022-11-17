@@ -54,13 +54,20 @@
   ![图片](imgs/KC.png)
   
 # Use Case Editor安装说明：
+
 1.从北航云盘下载org.xtext.example.requirements.updatesite-1.0.0-SNAPSHOT.zip。
+
 2.在RM2PT工具中，从主菜单栏Help → Install New Software 打开安装窗口。
+
 3.点击Add，在弹出窗口中点击Archive，选择之前下载的.zip文件，点击Add确认添加。
+
 4.添加.zip(即updatesite文件)之后，在下方会出现图1中的Feature，勾选之后默认Next即可安装。
-5. 安装过程中，出现提示，选择Install anyway。
-6. 安装完成后，软件提示重启以生效，重启即可。
-7. 重启后在任意文件夹下新建后缀名为.re的文件，按后续介绍书写自然语言需求，关键词会出现高亮，说明插件安装成功。
 
+5.安装过程中，出现提示，选择Install anyway。
 
+6.安装完成后，软件提示重启以生效，重启即可。
+
+7.重启后在任意文件夹下新建后缀名为.re的文件，按后续介绍书写自然语言需求，关键词会出现高亮，说明插件安装成功。
+
+  ![图片](imgs/uce.png)
 

@@ -57,6 +57,10 @@
 
   ![图片](imgs/KCn.png)
   
+## 案例：
+
+ ![图片](imgs/AL.png)
+  
 # Use Case Editor安装说明：
 
 1.从北航云盘下载org.xtext.example.requirements.updatesite-1.0.0-SNAPSHOT.zip。

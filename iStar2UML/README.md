@@ -66,8 +66,53 @@ Where CVI represents the current value of the investment, CI is Cost of Investen
 In order to demonstrate that the benefits obtained by reconverting iStar after extension by the iStar2UML method are greater than those obtained by direct conversion, we will test the iStar2UML method by means of the return on investment (ROI) formula.
 The ROI is obtained by converting the standard and extended iStar models by taking the ratio of the number of elements produced after the extension minus the number of elements produced before the extension (recovery value), to the number of elements produced after the extension (cost input). When the ROI is greater than 1, it shows that our method is worthwhile, and we will also demonstrate this at a theoretical dimension and at a case dimension.
 
-$Theoretical Dimension :$ We collected the number of expanded elements in Sequenc information and Entity information for the iStar models from the iStar2UML method at the conversion formula level, and also counted the newly generated elements for the generated UML models. The ROI formula resulted in an ROI of 250% for System Sequence Diagrams and 225% for Concept Class Diagrams, for an overall ROI of 237.5%, as shown in Table 2, but these are theoretical values and need to be verified in specific cases.
+$Theoretical Dimension :$ We collected the number of expanded elements in Sequenc information and Entity information for the iStar models from the iStar2UML method at the conversion formula level, and also counted the newly generated elements for the generated UML models. The ROI formula resulted in an ROI of 250% for System Sequence Diagrams and 225% for Concept Class Diagrams, for an overall ROI of 237.5%, as shown in Table 1, but these are theoretical values and need to be verified in specific cases.
 
 ![图片](imgs/T1.png)
 
-$Case Dimension :$ We will convert the standard iStar model in two ways (Conversion option 1: Execute the iStar2UML method to convert the standard iStar model. Conversion scenario 2: Execute the iStar2UML method to convert the extended IStar model.) The conversion of the cases is achieved by means of the conversion rules we have developed, and in the process we record the number of elements expanded, the elements generated and other data. The information on the number of elements to be expanded in each of the five cases is shown in Table 3.
+$Case Dimension :$ We will convert the standard iStar model in two ways (Conversion option 1: Execute the iStar2UML method to convert the standard iStar model. Conversion scenario 2: Execute the iStar2UML method to convert the extended IStar model.) The conversion of the cases is achieved by means of the conversion rules we have developed, and in the process we record the number of elements expanded, the elements generated and other data. The information on the number of elements to be expanded in each of the five cases is shown in Table 2.
+
+![图片](imgs/T2.png)
+
+ Based on these two options and the two parts of the expansion, we derived the ratio of expanded to unexpanded elements for the system sequence diagram and the ratio of expanded to unexpanded elements for the concept class diagram, respectively, as shown in Tables 3.
+ 
+ ![图片](imgs/T3.png)
+ 
+  Finally the above data was calculated based on the return on investment (ROI) and the final results are shown in Table 4. from the table we can see that all the results are greater than or equal to 100% and the overall average is also at 152.4%, which can effectively prove that our conversion method can achieve more demand with a small number of additions.
+
+![图片](imgs/T4.png)
+
+## RQ2: Is the result of the iStar2UML method conversion correct and what is the success rate?
+
+### Evaluation Metrics
+Relative Success : Success here refers to the correctness of the conversion results, which will be compared with the results of the manual conversion.
+
+$$Relative Success Rate=(NCRE/NSE)/N$$
+
+$$Overall Success Rate=(ADSRC)/N$$
+
+ Where NCRE represents Number of Conversion Result Elements, NSE is Number of Standard Elements, ADSRC is All Diagram Success Rates Cumulative of UML.
+
+### valuation Resul
+With the help of domain experts, the experiments will be carried out with the correct answers and we will compare the number of standard answer elements with the number of conversion result elements, obtain the conversion success rate for each UML diagram and calculate the evaluation value to the final success rate.
+
+![图片](imgs/T21.png)
+
+To determine the success rate of the transformation results, we first determine elements of the expected result of the transformation case and compare it with the elements of the actual transformation results to obtain the final success rate.
+
+**Use Case Diagram:**
+As shown in Table 7, we can completely convert actor, UC and association in use case diagram. The success rate of conversion can reach 100%.
+
+![图片](imgs/T22.png)
+
+**System Sequence Diagram:**
+After we extend the iStar metamodel and the filling in of sequence information by the modelers. As shown in Table 8, we can completely convert the system operation, system service, system sequence, and combined fragment (alt, loop) in the system sequence diagram. The success rate of conversion can also reach 100%.
+
+![图片](imgs/T23.png)
+
+**Conceptual Class Diagram:**
+ Our extended iStar metamodel can provide the modeler with possible entity information with a success rate of (63.3%, 28.7%, 50%, 59.6%, 43.3%). This is because even if we transform all the elements that already exist in the iStar model, there is still some information from the concept class diagram that does not exist in the iStar model. The remaining missing information can be manually added to the information about the results of the transformation.
+ 
+ ![图片](imgs/T24.png)
+ 
+ As shown in Table 10, the extension of the iStar model, and the assistance of the modelers, resulted in conversion rates of (87.7%, 76.3%, 83.3%, 86.5%, 81.1%), which is sufficient to demonstrate the completeness of our conversion results.

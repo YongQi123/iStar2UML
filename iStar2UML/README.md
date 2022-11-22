@@ -18,6 +18,7 @@ Since there is no Operator element in the iStar model in CombinedFragment, we ad
 
 As there is no explicit Entity related information in the iStar model, we refine this part by the modeler's judgement. Firstly, we have added the Boolean type attribute isEntity to the Role element, which allows the modeler to determine by their own judgement whether the current Role element can be an Entity or not. Secondly, we have also added the isEntity Boolean attribute to the Resource element, so that the modeller can determine whether the current Resource element is an Entity or an Attribute, and we have added two links to the Resource element itself. The association link is used to express the association relationship between an entity and an entity, and the attribute link is used to express the subordination relationship between two Resource (equivalent to an Entity and equivalent to an Attribute).
 
+![图片](imgs/yistarg.png)
 
 # iStar2UML: Transformation from iStar to UML models
 This section describes how to convert the iStar model into a UML model based on the Metamodel introduced in the previous section. First introduce the conversion rules. We  have pictures to illustrate the elements of iStar on the left and the conversion results of UML on the right, and use dashed lines with arrows to indicate the conversion direction and different colored lines to indicate the conversion rules for different elements in the same picture, then the conversion algorithm is introduced.
@@ -48,14 +49,91 @@ Operation and Parameter. Task is transformed into Operation, however, if the Tas
 Since the Goal model Metamodel in this part is made according to the Entity part of the UML Metamodel, only the corresponding elements need to be converted during the conversion. Since only Entity is added to the Goal model Metamodel for now, only this part will be converted, and the rest of the missing parts will be added to the converted UML model.
 ![图片](imgs/zz5.png)
 
-## CoCoME Case study
-We will use the RM2PT case of CoCoME (supermarket shopping system) as the caseof this experiment, and this process will be described below.Firstly, the Cashier can perform three actions,openCashDesk,closeCashDeskandprocessSale, and this part forms a simple use case diagram. When the actionpro-cessSaleis performed, it can be expanded to obtain the system sequence diagram.This part mainly reflects the interaction between Cashier and system, first tomak-eNewSale, then enter a loopenterItem, the customer will provide the cashier withinformation about the product barcode, quantity until the end of the cycle, and thenthe next actionendSale(end of sale). The last part is the domain model which mainlykeeps the entity data of the above process. The data stored areCashDesk,Cashier,Payment,CashPayment,CardPayment,Item,SalesLineItem.Based on the conditions provided above, we have created the corresponding Goalmodel.  First,  we  create  aCashierof  type  Role  with  three  goalsOpenCashDesk,CloseCashDeskandprocessSale. Next we need to add the following four tasks toprocessSale. The first task ismakeNewSaleand set it isPrior to ’false’ (to indicate thatthe current Task is the first element of the sequence) and connect it toprocessSaleviaAndRefinement. so that this task belongs toprocessSale. Then connect it to the nexttaskvia previousTask to get the order between tasks. The second task isenterItem(input item). In addition to doing the above, sinceenterItemis a special loop intask(customers may select multiple items), it is necessary to set its two propertiesisCom-binedFragmentandisLoopto true. The third task isendSale, which is a normal taskand only needs to be done like the first one. The last task isPayment, its previous-Task will not connect to otherTasks (used to indicate that the currentTask is the last element of the sequence), it is still a special task (selection) and We set itsisCom-binedFragmentproperty to ’true’.two new tasks need to be performed, the first oneisMakeCashPayment, which is connected to the task Payment withOrRefinement.The second one isMakeCardPayment, which is connected to the taskPaymentwithOrRefinement
-Then create a Customer of type Role, which is used to simulate the customer’sactions. The customer’s goal isPurchaseGoods, which is set to the Intentional ele-ment.  And  in  order  to  accomplish  this  goal,  two  tasks  need  to  be  done.The  firstone,ProvideProductInformation, is connected to the Goal with anAndRefinementconnection, and the second one,Pay, is also connected to the Goal with anAndRefine-mentconnection.  Then  comes  the  part  that  completes  the  information  exchangebetween the cashier and the user, when the cashier implements theenterItemtask,the customer needs to implementProvideProductInformationto provide the cashierwith relevant product information. When the cashier goes to theenterItemtask, theuser’sProvideProductInformationtask needs to provide  the cashier with the rele-vant  product  information,  create  thebarcodeandquantitiyelements  to  be  passedusing Resource (which is of type Dependency), and connect the two tasks via depen-deeElmt/dependerElmt.  When  the  cashier  gets  to  themakeCashPaymenttask,  thecostumer’s ”paytask needs to provide the cashier with the relevant product infor-mation.  We  create  the  Resource  elementamountto  indicate  the  amount  of  thecommodities. Then the relevant tasks is connected via dependeeElmt/dependerElmtas the same way described above. When the cashier reaches themakeCardPaymenttask, the customer’spaytask needs to provide the cashier with the relevant prod-uct information.CardAccountNumber,expiryDate,fee, these Resources need to beconnected via dependeeElmt/dependerElmt to thepaytask. Next, create aStoreM-anagerof type Role, which is the goal fororderProducts,receiveOrderedProduct,showStockReports,changePrice,listSuppliers,openStore,closeStore. And it is goal to  create  the  Role typemanageStore,manageProductCatalog,manageCashDesk,manageCashier,manageItem,manageSupplier.Finally, there is the entity section where we can fill in the required entity infor-mation.CashDesk,Cashier,Payment,CashPayment,CardPayment,SwipePayment,Item,SalesLineItemand connectItemandSalesLineItemwith Resource’sbarcodeandquantitiyare connected.
+# Evaluation
 
-![图片](imgs/cocomeKKK.png)
+In this section, we will evaluate the proposed approach by answering three research questions.
 
+## RQ1: What is the return on investment (ROI) for the iStar expansion method of the iStar2UML method?
+### Evaluation Metrics
+Return On Investment (ROI) : In order to demonstrate that the benefits obtained from reconverting iStar after it has been extended by the iStar2UML method are greater than those obtained from direct conversion, we will test the iStar2UML method by means of a return on investment (ROI) formula. 
 
-## CoCoME Case conversion results
-Next we give the results of the transformation, which will be divided into three parts, first is the use case diagram, which describes the relationship between actors and their use cases. Next is the system sequence diagram, which describes the use case processSale. Finally is the concept class diagram, which describes the entity information.
+$$ROI=(CVI-CI)/CI=(EGAE-EGBE)/NES$$
 
-![图片](imgs/cocomezzz.png)
+Where CVI represents the current value of the investment, CI is Cost of Investent, EGAE is Elements Generated After Extension, EGBE is Elements Generated Before Expansion, NES is Number of Elements Supplemented.
+
+### valuation Resul
+
+In order to demonstrate that the benefits obtained by reconverting iStar after extension by the iStar2UML method are greater than those obtained by direct conversion, we will test the iStar2UML method by means of the return on investment (ROI) formula.
+The ROI is obtained by converting the standard and extended iStar models by taking the ratio of the number of elements produced after the extension minus the number of elements produced before the extension (recovery value), to the number of elements produced after the extension (cost input). When the ROI is greater than 1, it shows that our method is worthwhile, and we will also demonstrate this at a theoretical dimension and at a case dimension.
+
+$Theoretical Dimension :$ We collected the number of expanded elements in Sequenc information and Entity information for the iStar models from the iStar2UML method at the conversion formula level, and also counted the newly generated elements for the generated UML models. The ROI formula resulted in an ROI of 250% for System Sequence Diagrams and 225% for Concept Class Diagrams, for an overall ROI of 237.5%, as shown in Table 1, but these are theoretical values and need to be verified in specific cases.
+
+![图片](imgs/T1.png)
+
+$Case Dimension :$ We will convert the standard iStar model in two ways (Conversion option 1: Execute the iStar2UML method to convert the standard iStar model. Conversion scenario 2: Execute the iStar2UML method to convert the extended IStar model.) The conversion of the cases is achieved by means of the conversion rules we have developed, and in the process we record the number of elements expanded, the elements generated and other data. The information on the number of elements to be expanded in each of the five cases is shown in Table 2.
+
+![图片](imgs/T2.png)
+
+ Based on these two options and the two parts of the expansion, we derived the ratio of expanded to unexpanded elements for the system sequence diagram and the ratio of expanded to unexpanded elements for the concept class diagram, respectively, as shown in Tables 3.
+ 
+ ![图片](imgs/T3.png)
+ 
+  Finally the above data was calculated based on the return on investment (ROI) and the final results are shown in Table 4. from the table we can see that all the results are greater than or equal to 100% and the overall average is also at 152.4%, which can effectively prove that our conversion method can achieve more demand with a small number of additions.
+
+![图片](imgs/T4.png)
+
+## RQ2: Is the result of the iStar2UML method conversion correct and what is the success rate?
+
+### Evaluation Metrics
+Relative Success : Success here refers to the correctness of the conversion results, which will be compared with the results of the manual conversion.
+
+$$Relative Success Rate=(NCRE/NSE)/N$$
+
+$$Overall Success Rate=(ADSRC)/N$$
+
+ Where NCRE represents Number of Conversion Result Elements, NSE is Number of Standard Elements, ADSRC is All Diagram Success Rates Cumulative of UML.
+
+### valuation Resul
+With the help of domain experts, the experiments will be carried out with the correct answers and we will compare the number of standard answer elements with the number of conversion result elements, obtain the conversion success rate for each UML diagram and calculate the evaluation value to the final success rate.
+
+![图片](imgs/T21.png)
+
+To determine the success rate of the transformation results, we first determine elements of the expected result of the transformation case and compare it with the elements of the actual transformation results to obtain the final success rate.
+
+**Use Case Diagram:**
+As shown in Table 7, we can completely convert actor, UC and association in use case diagram. The success rate of conversion can reach 100%.
+
+![图片](imgs/T22.png)
+
+**System Sequence Diagram:**
+After we extend the iStar metamodel and the filling in of sequence information by the modelers. As shown in Table 8, we can completely convert the system operation, system service, system sequence, and combined fragment (alt, loop) in the system sequence diagram. The success rate of conversion can also reach 100%.
+
+![图片](imgs/T23.png)
+
+**Conceptual Class Diagram:**
+ Our extended iStar metamodel can provide the modeler with possible entity information with a success rate of (63.3%, 28.7%, 50%, 59.6%, 43.3%). This is because even if we transform all the elements that already exist in the iStar model, there is still some information from the concept class diagram that does not exist in the iStar model. The remaining missing information can be manually added to the information about the results of the transformation.
+ 
+ ![图片](imgs/T24.png)
+ 
+ As shown in Table 10, the extension of the iStar model, and the assistance of the modelers, resulted in conversion rates of (87.7%, 76.3%, 83.3%, 86.5%, 81.1%), which is sufficient to demonstrate the completeness of our conversion results.
+ 
+ ## RQ3: Which method is more efficient, the iStar2UML method or the manual conversion method, given the same inputs?
+ 
+### Evaluation Metrics
+Time/Error Reduction : We recruited six experimenters for the model conversion experiment, divided them into two groups and converted five cases using the manual conversion method and the iStar2UML method respectively, and recorded the time and number of errors in the conversion process, and derive Time Reduction and Error Reduction for the iStar2UML method.
+
+$$Time Reduction= Manual_{Time}-iStar2UM_{Time}/Manual_{Time}$$
+
+$$Error Reduction= Manual_{SR}-iStar2UML_{SR}$$
+
+Where $Manual_{Time}$ represents Number of Manual Method Time, $iStar2UML_{Time}$ is Manual Method Time, $iStar2UML_{Time}$ is iStar2UML Method Time, $Manual_{SR}$ Manual Success Rate, $iStar2UML_{SR})$ is iStar2UML Success Rate.
+
+### valuation Resul
+
+We recruited six experimenters for the model conversion experiment, divided them into two groups and converted five cases using the manual conversion method and the iStar2UML method respectively, and recorded the time and number of errors in the conversion process.
+We will compare these data to prove that our method is better. Time Reduction and Error Reduction, i.e. the ratio of the experimental data of the manual conversion method to the experimental data of the iStar2UML method (containing the operation time, number of errors).
+We recruited six experimenters to perform model conversion experiments, three by the iStar2UML method for five cases (iStar2UML: 1. Experimenters understand the iStar model. 2. Add expansion information to the iStar model. 3. Execute the iStar2UML tool. 4. Experimenters add UML diagrams.) The other 3 by manual methods (Manual methods: 1. Experimenter understands the iStar model. 2. Experimenter draws UML diagrams.) Converting 5 cases, recording the time and number of errors in the process and calculating the average value, which can be obtained by using the formula. The time taken to convert was reduced by an average of 21.4% and the correct rate increased by 11.6%.
+
+ ![图片](imgs/T31.png)
+ 
+Analysing the data we can also see that in cases where the time taken by the two methods is relatively similar (e.g. COCOME, LoanPS), the iStar2UML method has a much higher correct rate than the manual method. This can indicate that the iStar2UML method achieves a higher correct rate than the manual method in the case of less time spent, and is better than the manual method in the same situation.

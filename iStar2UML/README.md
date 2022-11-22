@@ -116,3 +116,24 @@ After we extend the iStar metamodel and the filling in of sequence information b
  ![图片](imgs/T24.png)
  
  As shown in Table 10, the extension of the iStar model, and the assistance of the modelers, resulted in conversion rates of (87.7%, 76.3%, 83.3%, 86.5%, 81.1%), which is sufficient to demonstrate the completeness of our conversion results.
+ 
+ ## RQ3: Which method is more efficient, the iStar2UML method or the manual conversion method, given the same inputs?
+ 
+### Evaluation Metrics
+Time/Error Reduction : We recruited six experimenters for the model conversion experiment, divided them into two groups and converted five cases using the manual conversion method and the iStar2UML method respectively, and recorded the time and number of errors in the conversion process, and derive Time Reduction and Error Reduction for the iStar2UML method.
+
+$$Time Reduction= Manual_{Time}-iStar2UM_{Time}/Manual_{Time}$$
+
+$$Error Reduction= Manual_{SR}-iStar2UML_{SR}$$
+
+Where $Manual_{Time}$ represents Number of Manual Method Time, $iStar2UML_{Time}$ is Manual Method Time, $iStar2UML_{Time}$ is iStar2UML Method Time, $Manual_{SR}$ Manual Success Rate, $iStar2UML_{SR})$ is iStar2UML Success Rate.
+
+### valuation Resul
+
+We recruited six experimenters for the model conversion experiment, divided them into two groups and converted five cases using the manual conversion method and the iStar2UML method respectively, and recorded the time and number of errors in the conversion process.
+We will compare these data to prove that our method is better. Time Reduction and Error Reduction, i.e. the ratio of the experimental data of the manual conversion method to the experimental data of the iStar2UML method (containing the operation time, number of errors).
+We recruited six experimenters to perform model conversion experiments, three by the iStar2UML method for five cases (iStar2UML: 1. Experimenters understand the iStar model. 2. Add expansion information to the iStar model. 3. Execute the iStar2UML tool. 4. Experimenters add UML diagrams.) The other 3 by manual methods (Manual methods: 1. Experimenter understands the iStar model. 2. Experimenter draws UML diagrams.) Converting 5 cases, recording the time and number of errors in the process and calculating the average value, which can be obtained by using the formula. The time taken to convert was reduced by an average of 21.4% and the correct rate increased by 11.6%.
+
+ ![图片](imgs/T31.png)
+ 
+Analysing the data we can also see that in cases where the time taken by the two methods is relatively similar (e.g. COCOME, LoanPS), the iStar2UML method has a much higher correct rate than the manual method. This can indicate that the iStar2UML method achieves a higher correct rate than the manual method in the case of less time spent, and is better than the manual method in the same situation.

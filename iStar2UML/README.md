@@ -1,4 +1,25 @@
-# Goal2UML: Transformation from iStar to UML models
+# Extension of iStar Model
+
+In the above introduction we can find that the IStar model does not describe all requirements, because the IStar model wants to express the user's requirements and does not take into account the way the system operates, but if you want to implement the conversion from the iStar model to UML, you need the relevant information inside the system, and how to implement this part of the information in the most effective way will be the supplement of this paper The most effective way to implement this additional information will be a major challenge in this paper.
+
+In the iStar model, the main missing information is divided into three areas. Firstly, the concept of order is missing in the IStar model. Secondly, the tasks in the iStar model lack information such as loops and selections. Thirdly, the concept of entities is missing from the IStar model. After discussion we will use two approaches to add to the above information. For the concepts of sequence, loops and selection, this will be achieved by extending the IStar metamodel and creating the appropriate modelling tools to be added by the modellers. The addition of entity information to the IStar metamodel is more costly and will be done by an algorithm that automatically identifies some of the entity information to generate a concept class diagram, which will then be added to the generated UML model by modellers.
+
+## Complement Sequence
+
+First, we need to solve the problem that the iStar model lacks the sequence property. We will add a Boolean type attribute isPrior to the Task element in the iStar model metamodel, and introduce a reference (previousTask) to point to itself. If isPrior is true, it means that the current Task is not the first element, if false, then the current Task is the first element and the sequence should start from here. previousTask is used to point to the next Task of the current Task, if previousTask does not point to the next Task that means that the sequence ends.
+
+## Complement Interaction Information
+
+Then it is necessary to solve other problems in converting Task to Interaction, which has two forms of CombinedFragment,  Loop and Alt (selection). Whether it is an Alt can be determined by whether the relationship with the other elements is OrRefinement. However, whether it is a loop iStar cannot be indicated. To deal with this problem, we add two properties of Boolean type isCombinedFragment and isLoop in Task, which is used to determine whether there is a CombinedFragment element and whether it is a Loop element respectively. If the isCombinedFragment of the Task is false, the Task will have no CombinedFragment attribute in the Interaction after the conversion, and if it is true, we will continue to judge whether isLoop is true, and if it is true the Task will have the Loop property, and if it is false, we will end the judgment.
+
+Since there is no Operator element in the iStar model in CombinedFragment, we add a Constraint element to the Metamodel for conversion to an Operator element.
+
+## Complement Entity
+
+As there is no explicit Entity related information in the iStar model, we refine this part by the modeler's judgement. Firstly, we have added the Boolean type attribute isEntity to the Role element, which allows the modeler to determine by their own judgement whether the current Role element can be an Entity or not. Secondly, we have also added the isEntity Boolean attribute to the Resource element, so that the modeller can determine whether the current Resource element is an Entity or an Attribute, and we have added two links to the Resource element itself. The association link is used to express the association relationship between an entity and an entity, and the attribute link is used to express the subordination relationship between two Resource (equivalent to an Entity and equivalent to an Attribute).
+
+
+# iStar2UML: Transformation from iStar to UML models
 This section describes how to convert the iStar model into a UML model based on the Metamodel introduced in the previous section. First introduce the conversion rules. We  have pictures to illustrate the elements of iStar on the left and the conversion results of UML on the right, and use dashed lines with arrows to indicate the conversion direction and different colored lines to indicate the conversion rules for different elements in the same picture, then the conversion algorithm is introduced.
 
 ## Use case diagram conversion rules

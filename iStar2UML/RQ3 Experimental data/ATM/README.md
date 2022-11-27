@@ -111,8 +111,6 @@
 
    System Sequence Diagram：4 min
    
-   System Sequence Diagram：4 min
-   
    Conceptual Class Diagram：3 min 
    
    Error：6

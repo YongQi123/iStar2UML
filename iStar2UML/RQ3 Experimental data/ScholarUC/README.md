@@ -70,7 +70,7 @@
    
    Conceptual Class Diagram：17 min 
    
-    Error：12
+   Error：12
    
 ### Extension：
 

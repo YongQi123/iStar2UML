@@ -33,7 +33,7 @@
 
 ### Concept Class Diagram
 
-![图片](ATM/ATMclassM.png)
+![图片](ATM/atm-ccd.png)
 
 
 ## COCOME
@@ -48,7 +48,7 @@
 
 ### Concept Class Diagram
 
-![图片](COCOME/classCOCOME.png)
+![图片](COCOME/cocome-ccd.png)
 
 ## LibraryMS
 
@@ -76,7 +76,7 @@
 
 ### Concept Class Diagram
 
-![图片](LibraryMS/UMLclass.png)
+![图片](LibraryMS/library-ccd.png)
 
 ## LoanPS
 ### Use Case Diagram
@@ -97,7 +97,7 @@
 
 ### Concept Class Diagram
 
-![图片](LoanPS/classLoanPS.png)
+![图片](LoanPS/Loan-ccd.png)
 
 ## ScholarUC
 
@@ -149,4 +149,4 @@
 
 ### Concept Class Diagram
 
-![图片](ScholarUC/ConceptualClassDiagram.png)
+![图片](ScholarUC/cd.jpg)

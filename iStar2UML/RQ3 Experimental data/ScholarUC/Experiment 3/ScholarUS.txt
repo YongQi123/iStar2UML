@@ -1,23 +1,39 @@
-迭代一：
+Experiment 3
 
-人工：
-   用例图：12分钟
-   顺序图：25分钟
-   类图：8分钟
-   错误：44
-扩充：
-   理解：20分钟
-   扩展IStar：16分钟
-   补充UML：17分钟
-   错误：38
+ Iteration 1
+
+ Manual：
+
+   Use Case Diagram：12 min
    
-迭代二：
-人工：
-   顺序图：0分钟
-   类图：18分钟
-   错误：21
-扩充：
-   补充UML：16分钟
+   System Sequence Diagram：25 min
+   
+   Conceptual Class Diagram：8 min
+   
+   Error：44
+   
+ Extension：
 
-迭代三：
-类图：16分钟
+   Comprehension：20 min
+   
+   Extending iStar：16 min
+   
+   Supplementing UML：17 min
+   
+   Error：38
+   
+ Iteration 2
+
+ Manual：
+
+   Conceptual Class Diagram：18 min 
+   
+   Error：21
+   
+ Extension：
+
+   Supplementing UML：16 min
+
+ Iteration 3
+
+   Conceptual Class Diagram：16 min

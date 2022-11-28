@@ -1,21 +1,4 @@
-# Input（iStar）
-
-## ATM
-![图片](ATM/ATMiStar.png)
-
-## COCOME
-![图片](COCOME/iStarCOCOME.png)
-
-## LibraryMS
-![图片](LibraryMS/iStar.png)
-
-## LoanPS
-![图片](LoanPS/iStarLoanPS.png)
-
-## ScholarUC
-![图片](ScholarUC/iStarModel.png)
-
-# Output（UML）
+# Conversion result
 
 ## ATM
 

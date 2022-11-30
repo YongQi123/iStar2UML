@@ -74,7 +74,7 @@ permalink: /UseCaseEditor/
   
 # Use Case Editor安装说明：
 
-1.从北航云盘下载org.xtext.example.requirements.updatesite-1.0.0-SNAPSHOT.zip。
+1.[GITHub下载压缩包地址](https://github.com/YongQi123/iStar2UML/tree/main/UseCaseEditor)
 
 2.在RM2PT工具中，从主菜单栏Help → Install New Software 打开安装窗口。
 

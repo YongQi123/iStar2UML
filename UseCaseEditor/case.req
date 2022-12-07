@@ -1,0 +1,30 @@
+As a Cashier, I want to process sale, so that customers can buy goods
+{
+Basic Flow {
+	  (User) 1. The Customer Shall arrives at a POS checkout with goods and services to purchase.
+      (System) 1. The CoCoME Shall opens the cash register.
+      (User) 2. The Cashier Shall starts a new sale.
+      (System) 2. The CoCoME Shall starts a new sale.
+      (User) 3. The Cashier Shall entars item identifier.
+      (System) 3. When starts a new sale, The CoCoME Shall Records each sale line item and presents item description and running total.
+      (User) 4. The Cashier Shall tells customerthe total an asks for payment.
+      (System) 4. When end of sale, The CoCoME Shall Presents total with taxes calculated.
+      (User) 5. The Customer Shall pay.
+      (System) 5.  When end of payment, The CoCoME Shall handles payment.
+      (System) 5. When completed sale, The CoCoME Shall logs completed sale and sends information to external accounting and inventory systms and presents receipt.
+    }
+Alternative Flow {
+	A. At any time, Manager requests an override operation :
+      1. System enters Manager authorized mode.
+      2. Manager or Cashier performs one Manager mode operation cash balance change resume a suspended sale on another register void a sale etc.
+      3. System reverts to Cashier authorized mode.
+    B. At any time, System fails :
+      To support recovery and correct accounting ensure all mansaction sensitive state and events can be recovered from any step of scenario.
+      1. Cashier restarts System logs in and requests recovery of prior state.
+      2. System reconstructs prior state.
+          a2. System detects anomalies preventing recovery.
+             1. System signals error to Cashier records error and enters a clean state.
+    }
+}
+As a Cashier, I want to open cash desk, so that customers can pay
+As a Cashier, I want to open cash desk, so that customers can pay
